@@ -16,18 +16,12 @@ const TransactionItem = sequelize.define("TransactionItem", {
       model: Transaction,
       key: "id",
     },
+    onDelete: "CASCADE", // Optional: handle related rows when a parent row is deleted
+    onUpdate: "CASCADE", // Optional: handle related rows when a parent row is updated
   },
   batchId: {
     type: DataTypes.INTEGER,
     allowNull: true,
-  },
-  discounted: {
-    type: DataTypes.FLOAT,
-    defaultValue: 0,
-  },
-  giveDiscount: {
-    type: DataTypes.BOOLEAN,
-    defaultValue: false,
   },
   gst: {
     type: DataTypes.FLOAT,
@@ -41,11 +35,15 @@ const TransactionItem = sequelize.define("TransactionItem", {
     type: DataTypes.STRING,
     allowNull: true,
   },
-  price: {
+  actualPricePerUnit: {
     type: DataTypes.FLOAT,
     allowNull: false,
   },
-  pricePerUnit: {
+  actualTotalPrice: {
+    type: DataTypes.FLOAT,
+    allowNull: false,
+  },
+  discount: {
     type: DataTypes.FLOAT,
     allowNull: false,
   },
@@ -55,6 +53,10 @@ const TransactionItem = sequelize.define("TransactionItem", {
   },
 });
 
+Transaction.hasMany(TransactionItem, {
+  foreignKey: "transaction_id",
+  as: "items",
+});
 TransactionItem.belongsTo(Transaction, {
   foreignKey: "transaction_id",
   as: "transaction",

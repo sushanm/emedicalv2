@@ -1,7 +1,7 @@
 const { Sequelize } = require("sequelize");
 
 // Initialize Sequelize with MySQL database configuration
-const sequelize = new Sequelize("react_mysql_crud", "root", "sa123", {
+const sequelize = new Sequelize("kotian_billing", "root", "sa123", {
   host: "localhost",
   dialect: "mysql",
 });

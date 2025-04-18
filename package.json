@@ -3,9 +3,21 @@
     "axios": "^1.7.9",
     "body-parser": "^1.20.3",
     "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "mssql": "^11.0.1",
     "mysql2": "^3.12.0",
+    "nodemailer": "^6.10.0",
     "sequelize": "^6.37.5"
+  },
+  "scripts": {
+    "build": "babel . --out-dir dist --ignore node_modules",
+    "start": "nodemon --exec 'npm run build && node dist/app.js'"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.26.4",
+    "@babel/core": "^7.26.0",
+    "@babel/preset-env": "^7.26.0",
+    "nodemon": "^3.1.9"
   }
 }
